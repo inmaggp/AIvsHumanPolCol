@@ -189,11 +189,11 @@ for (threshold in thresholds) {
   threshold_dataframes[[df_name]] <- LLM_copy
 }
 # Uncomment following lines to save different binarizations as Excel
- wb <- createWorkbook()
- for (name in names(threshold_dataframes)) { 
- addWorksheet(wb, name)  
- writeData(wb, name, threshold_dataframes[[name]])}
- saveWorkbook(wb, "Data/binarizations_LLM.xlsx", overwrite = TRUE)
+ #wb <- createWorkbook()
+ #for (name in names(threshold_dataframes)) { 
+ #addWorksheet(wb, name)  
+ #writeData(wb, name, threshold_dataframes[[name]])}
+ #saveWorkbook(wb, "Data/binarizations_LLM.xlsx", overwrite = TRUE)
 ```
  
 Same binarization process for LLaMA results 
@@ -1462,7 +1462,7 @@ for(df_name in names(threshold_dataframes)){
   }}
 
 # Uncomment to save ´results_df´as a XLSX file.
- write_xlsx(results_df, "Results/Main project/BART/results_main_BART.xlsx")
+ #write_xlsx(results_df, "Results/Main Project/BART/results_main_BART.xlsx")
 results_main_BART = results_df
 ```
 
@@ -1878,7 +1878,7 @@ for(df_name in names(threshold_dataframes)){
   }}
 
 # Uncomment to save ´results_df´as a XLSX file.
- write_xlsx(results_df, "Results/Main project/LLaMA/results_main_LLaMA.xlsx")
+ #write_xlsx(results_df, "Results/Main Project/LLaMA/results_main_LLaMA.xlsx")
 results_main_LLaMA = results_df
 ```
 

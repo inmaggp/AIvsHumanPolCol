@@ -1,0 +1,9 @@
+services:
+  tbv:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: .
+        target: /root/tbv

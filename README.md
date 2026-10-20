@@ -1,6 +1,6 @@
 #  Trust but Verify: AI Models for Coding Political Content in Social Media
 
-This repository contains all code, data, and documentation required to reproduce the analyses reported in the manuscript *“Trust but Verify: AI Models for Coding Political Content in Social Media”*.  
+This repository contains all code, data, and documentation required to reproduce the analyses reported in the manuscript *"Trust but Verify: AI Models for Coding Political Content in Social Media"*.  
 The project is organized around a single fully reproducible R Markdown workflow, complemented by three standalone R scripts and one Jupyter notebook for users who prefer modular execution.
 
 ---
@@ -62,13 +62,20 @@ The file **Markdown.Rmd** provides a complete, step‑by‑step analytical workf
 - explanations of each analytical step  
 - links to intermediate outputs  
 
-It can be knitted directly:
+It can be knitted directly from R:
 
 ```r
 rmarkdown::render("Markdown.Rmd")
 ```
 
-This is the **preferred reproducible path**.
+If you prefer to knit this inside a Docker container, install [Docker (rootless mode)](https://docs.docker.com/engine/security/rootless/) and run:
+
+```bash
+docker compose build
+docker compose run --remove-orphans --rm tbv Rscript -e "rmarkdown::render('Markdown.Rmd')"
+```
+
+This is the **preferred reproducible path**. Excluding the image building and without enabling zero-shot classification (using the saved classification files, see the source), it takes 13 minutes to knit on a regular computer.
 
 ---
 
@@ -79,19 +86,11 @@ For users who prefer to reproduce each analysis separately, the repository inclu
 ### PilotStudy.R  
 Reproduces the pilot dataset analysis.  
 Includes preprocessing, zero-shot classification (ZSC), binarization, metric computation, and figure generation.  
-The ZSC step can be skipped using:
 
-```bash
-SKIP_ZSC=YES
-```
+
 ### MainStudy.R  
 Reproduces the BART analysis of the main dataset.  
 Includes preprocessing, zero-shot classification (ZSC), binarization, metric computation, and figure generation.  
-The ZSC step can be skipped using:
-
-```bash
-SKIP_ZSC=YES
-```
 
 ### MainStudy_LLaMA.R  
 Reproduces the LLaMA analysis of the main dataset using the classifications generated in the notebook.
@@ -138,21 +137,6 @@ Running the full classification for the complete datasets is **not recommended o
 - Use the provided **200‑text test datasets** for quick checks:
   - `pilot_data_1_200.xlsx`
   - `main_data_1_200.xlsx`
-
----
-
-## 6. Docker Environment
-
-```bash
-docker compose build
-docker compose run --remove-orphans --rm tbv Rscript Functions.R
-```
-
-For Quarto rendering:
-
-```bash
-docker compose run --remove-orphans --rm tbv quarto render MainStudy_LLaMA.R
-```
 
 ---
 
@@ -210,4 +194,3 @@ Both files are produced by combining batch outputs, as running the full dataset 
 ## 9. Contact
 
 For questions or issues, please open an issue in the repository or contact the authors.
-```
